@@ -1,0 +1,48 @@
+<div class="flex h-screen w-full items-center justify-center overflow-hidden p-2">
+  <mat-card class="cardWithShadow overflow-hidden auth-card mx-auto mb-0">
+    <div class="grid grid-cols-12 gap-6">
+      <div class="lg:col-span-6 col-span-12 flex items-stretch">
+        <div class="w-full p-10 flex flex-col justify-center aling-center">
+          <div class="text-center">Your Social Campaigns</div>
+
+          <form class="mt-8" [formGroup]="loginForm" (ngSubmit)="login()">
+
+            <mat-label class="mat-subtitle-2 text-sm font-semibold mb-3 block text-start">
+              Email
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput formControlName="email" type="email" />
+            </mat-form-field>
+
+            <mat-label class="mat-subtitle-2 text-sm font-semibold mb-3 block text-start">
+              Password
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput formControlName="password" type="password" />
+            </mat-form-field>
+
+            <div class="flex items-center justify-between mb-3">
+              <mat-checkbox formControlName="remember">Remember this Device</mat-checkbox>
+            </div>
+
+            <button
+              mat-flat-button
+              color="primary"
+              class="w-full"
+              type="submit"
+              [disabled]="loginForm.invalid || loading">
+              {{ loading ? 'Signing in...' : 'Sign In' }}
+            </button>
+
+          </form>
+
+        </div>
+      </div>
+      <div class="lg:col-span-6 col-span-12 relative hidden lg:flex justify-center items-stretch bg-light p-5">
+        <div class="flex items-center justify-center w-full">
+          <img src="/assets/images/backgrounds/login-bg.svg" alt="login" class="img-fluid object-cover" />
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

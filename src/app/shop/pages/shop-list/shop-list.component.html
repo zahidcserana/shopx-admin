@@ -1,0 +1,198 @@
+<div class="flex items-center justify-between mb-4 gap-3">
+  <div class="flex items-center gap-3 flex-1">
+
+    <mat-form-field appearance="outline" class="w-full max-w-md" subscriptSizing="dynamic">
+      <mat-label>Search shop</mat-label>
+      <input
+        matInput
+        type="text"
+        #searchInput
+        (keyup)="applySearch($event)"
+        placeholder="Code, name or owner"
+      />
+      <mat-icon matPrefix class="mr-2">search</mat-icon>
+
+      <button
+        *ngIf="searchInput.value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearSearch(searchInput)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button
+      mat-stroked-button
+      class="h-[48px] transition-all"
+      [class.active-expired]="isExpired"
+      (click)="toggleExpiredFilter()"
+    >
+      <mat-icon>{{ isExpired ? 'history_toggle_off' : 'filter_alt' }}</mat-icon>
+      {{ isExpired ? 'Expired' : 'Filter Expired' }}
+    </button>
+
+    <button
+      mat-stroked-button
+      class="h-[48px] transition-all"
+      [class.active-soon]="isExpiredSoon"
+      (click)="toggleExpiredSoonFilter()"
+    >
+      <mat-icon>{{ isExpiredSoon ? 'notification_important' : 'timer' }}</mat-icon>
+      {{ isExpiredSoon ? 'Expiring Soon' : 'Filter Expiring Soon' }}
+    </button>
+
+  </div>
+
+  <button mat-flat-button color="primary" (click)="add()" class="h-[48px]">
+    <mat-icon>add</mat-icon>
+    Add Shop
+  </button>
+</div>
+
+<!-- Table -->
+<div class="overflow-x-auto">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    matSortDisableClear
+    class="w-full mat-elevation-z2"
+  >
+    <!-- Name -->
+    <ng-container matColumnDef="branch_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Shop
+      </th>
+      <td mat-cell *matCellDef="let row">
+         <button
+          color="warn"
+          class="cursor-pointer"
+          (click)="edit(row)"
+        >
+          {{ row.branch_name }}
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pharmacy_shop_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Company
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.pharmacy.pharmacy_shop_name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="branch_city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        City
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.branch_city }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="branch_area">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Area</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_area }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="branch_full_address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_full_address }}</td>
+    </ng-container>
+    <ng-container matColumnDef="branch_mobile">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_mobile }}</td>
+    </ng-container>
+    <ng-container matColumnDef="branch_alt_mobile">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_alt_mobile }}</td>
+    </ng-container>
+    <ng-container matColumnDef="branch_contact_person_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Person</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_contact_person_name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="branch_contact_person_mobile">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Mobile</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_contact_person_mobile }}</td>
+    </ng-container>
+    <ng-container matColumnDef="branch_contact_person_alt_mobile">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Contact Phone</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_contact_person_alt_mobile }}</td>
+    </ng-container>
+    <ng-container matColumnDef="branch_model_pharmacy_status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let row">{{ row.branch_model_pharmacy_status }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="subscription_period">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Subscription</th>
+      <td mat-cell *matCellDef="let row" (click)="updateSubscription(row)" class="cursor-pointer hover:bg-blue-50 p-2">
+        <div class="flex flex-col">
+          <span class="font-bold text-blue-600 flex items-center gap-1">
+            {{ row.subscription_period }} Days
+            <mat-icon inline class="text-[10px]">edit</mat-icon>
+          </span>
+          <span class="text-[11px] text-gray-500">
+            Expires: {{ getExpiryDate(row) | date:'mediumDate' }}
+          </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subscription_count">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Subscription Complete</th>
+      <td mat-cell *matCellDef="let row">{{ row.subscription_count }}</td>
+    </ng-container>
+
+    <!-- Actions -->
+     <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>
+        &nbsp;
+      </th>
+      <td mat-cell *matCellDef="let row" class="flex">
+        <button
+          mat-icon-button
+          color="primary"
+          [routerLink]="['/shop/edit', row.id]"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="delete(row)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+
+    <!-- Empty state -->
+    <tr *ngIf="dataSource.data.length === 0">
+      <td colspan="4" class="text-center py-6 text-gray-500">
+        No shops found
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!-- Paginator -->
+<mat-paginator
+  [length]="total"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 25, 50]"
+  showFirstLastButtons
+>
+</mat-paginator>

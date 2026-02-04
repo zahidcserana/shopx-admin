@@ -1,0 +1,67 @@
+<div
+    class="app-topstrip fixed top-0 left-0 z-10 w-full bg-linear-to-r from-[#001138] to-[#001e66] text-white py-4 px-6 flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
+    <div class="hidden sm:flex items-center justify-center gap-5">
+        <a class="flex items-center" href="https://adminmart.com/" target="_blank">
+            <img src="/assets/images/logos/diagram.svg" alt="" width="150">
+        </a>
+
+        <div class="linkbar hidden xl:flex items-center justify-center gap-4 border-l border-white/40 pl-5">
+            <!-- Templates -->
+            <a mat-button
+                class="link-hover hover:text-[#5D87FF]! active:text-[#5D87FF]! hover:[&_.mat-mdc-button-persistent-ripple::before]:opacity-0! active:[&_.mat-mdc-button-persistent-ripple::before]:opacity-0! h-auto! px-0! text-white! flex"
+                href="https://analyticalj.com" target="_blank">
+                <div class="flex items-center gap-2 text-base font-normal">
+                    <i class="iconify text-xl flex" data-icon="solar:window-frame-linear"></i>
+                    Contract
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="topstrip-right flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4">
+
+        <div class="topstrip-right-inner flex justify-center items-center flex-col gap-4 md:flex-row md:gap-2.5">
+
+            <div class="flex justify-center items-center gap-2.5">
+                <!-- Live Preview -->
+                <button
+                    class="live-preview-drop rounded hover:bg-[#3772FF]! flex items-center gap-4 text-white! text-base px-4"
+                    matButton="outlined" [matMenuTriggerFor]="beforeMenu">
+                    <div class="flex items-center gap-1.5">
+                        Office
+                        <i class="iconify text-xl flex" data-icon="solar:alt-arrow-down-linear"></i>
+                    </div>
+                </button>
+                <mat-menu class="px-4 py-2 rounded-lg" #beforeMenu="matMenu" xPosition="before">
+                    <a mat-menu-item class="rounded-lg"
+                        href="https://analyticalj.com"
+                        target="_blank">
+                        <div class="flex items-center gap-3 text-base">
+                            Dhaka
+                        </div>
+                    </a>
+                    <a mat-menu-item class="rounded-lg"
+                        href="https://analyticalj.com"
+                        target="_blank">
+                        <div class="flex items-center gap-3 text-base">
+                            Gazipur
+                        </div>
+                    </a>
+                </mat-menu>
+
+                <!-- Get Pro -->
+                <a matButton="filled" class="get-pro-btn text-white hover:bg-[#5D87FF]" href="#">
+                  <div class="flex items-center gap-2 text-base font-normal">
+                      <i class="iconify text-lg flex" data-icon="solar:lock-keyhole-minimalistic-line-duotone"></i>
+                      <button
+                        color="warn"
+                        class="w-full"
+                        (click)="logout()">
+                        Logout
+                      </button>
+                  </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

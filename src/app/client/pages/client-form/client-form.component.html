@@ -1,0 +1,62 @@
+<mat-card class="cardWithShadow theme-card">
+  <div class="p-6">
+    <mat-card-title class="mb-0">{{ isEdit ? 'Edit Client' : 'Add Client' }}</mat-card-title>
+  </div>
+  <mat-card-content class="border-t border-border">
+    <mat-dialog-content class="dialog-content">
+      <form [formGroup]="form" class="p-4 space-y-4">
+
+        <mat-form-field class="w-full">
+          <mat-label>Shop Code</mat-label>
+          <input matInput formControlName="pharmacy_shop_code">
+
+          <!-- required -->
+          <mat-error *ngIf="f['pharmacy_shop_code'].hasError('required')">
+            Shop code is required
+          </mat-error>
+
+          <!-- backend -->
+          <mat-error *ngIf="f['pharmacy_shop_code'].hasError('backend')">
+            {{ f['pharmacy_shop_code'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="w-full">
+          <mat-label>Shop Name</mat-label>
+          <input matInput formControlName="pharmacy_shop_name">
+          <mat-error *ngIf="f['pharmacy_shop_name'].invalid && f['pharmacy_shop_name'].touched">
+            Shop name is required
+          </mat-error>
+          <mat-error *ngIf="f['pharmacy_shop_name'].hasError('backend')">
+            {{ f['pharmacy_shop_name'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Owner Name</mat-label>
+          <input matInput formControlName="pharmacy_shop_owner_name">
+          <mat-error *ngIf="f['pharmacy_shop_owner_name'].invalid && f['pharmacy_shop_owner_name'].touched">
+            Owner name is required
+          </mat-error>
+          <mat-error *ngIf="f['pharmacy_shop_owner_name'].hasError('backend')">
+            {{ f['pharmacy_shop_owner_name'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Licence Number</mat-label>
+          <input matInput formControlName="pharmacy_shop_licence_no">
+        </mat-form-field>
+
+        <div class="flex justify-end gap-2 mt-4">
+          <button mat-stroked-button (click)="cancel()">Cancel</button>
+          <button mat-flat-button color="primary" (click)="save()" [disabled]="form.invalid">
+            {{ isEdit ? 'Update' : 'Save' }}
+          </button>
+        </div>
+
+      </form>
+    </mat-dialog-content>
+  </mat-card-content>
+</mat-card>

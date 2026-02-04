@@ -1,0 +1,269 @@
+<mat-card class="cardWithShadow theme-card">
+  <div class="p-6">
+    <mat-card-title class="mb-0">{{ isEdit ? 'Edit Shop' : 'Add Shop' }}</mat-card-title>
+  </div>
+  <mat-card-content class="border-t border-border">
+    <mat-dialog-content class="dialog-content" MatDialogModule>
+      <form [formGroup]="form" class="p-4 space-y-4">
+        <!-- Company (Searchable / Backend) -->
+        <mat-form-field class="w-full">
+          <mat-label>Company</mat-label>
+
+          <input
+            matInput
+            type="text"
+            [matAutocomplete]="auto"
+            [formControl]="companyCtrl"
+            placeholder="Search company..."
+          />
+
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="onCompanySelected($event.option.value)"
+            [displayWith]="displayCompany"
+          >
+            <mat-option
+              *ngFor="let company of companies"
+              [value]="company"
+            >
+              {{ company.pharmacy_shop_name }}
+            </mat-option>
+          </mat-autocomplete>
+
+          <mat-error *ngIf="f['pharmacy_id'].hasError('required')">
+            Company is required
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Branch Name -->
+        <mat-form-field class="w-full">
+          <mat-label>Shop Name</mat-label>
+          <input matInput formControlName="branch_name">
+
+          <mat-error *ngIf="f['branch_name'].hasError('required')">
+            Shop name is required
+          </mat-error>
+
+          <mat-error *ngIf="f['branch_name'].hasError('backend')">
+            {{ f['branch_name'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- City -->
+        <mat-form-field class="w-full">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="branch_city">
+
+          <mat-error *ngIf="f['branch_city'].hasError('backend')">
+            {{ f['branch_city'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Area -->
+        <mat-form-field class="w-full">
+          <mat-label>Area</mat-label>
+          <input matInput formControlName="branch_area">
+
+          <mat-error *ngIf="f['branch_area'].hasError('backend')">
+            {{ f['branch_area'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Full Address -->
+        <mat-form-field class="w-full">
+          <mat-label>Full Address</mat-label>
+          <textarea matInput rows="2" formControlName="branch_full_address"></textarea>
+
+          <mat-error *ngIf="f['branch_full_address'].hasError('backend')">
+            {{ f['branch_full_address'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Mobile -->
+        <mat-form-field class="w-full">
+          <mat-label>Shop Mobile</mat-label>
+          <input matInput formControlName="branch_mobile">
+
+          <mat-error *ngIf="f['branch_mobile'].hasError('backend')">
+            {{ f['branch_mobile'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Shop Mobile_2</mat-label>
+          <input matInput formControlName="branch_alt_mobile">
+
+          <mat-error *ngIf="f['branch_alt_mobile'].hasError('backend')">
+            {{ f['branch_alt_mobile'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Contact Person -->
+        <mat-form-field class="w-full">
+          <mat-label>Contact Person Name</mat-label>
+          <input matInput formControlName="branch_contact_person_name">
+
+          <mat-error *ngIf="f['branch_contact_person_name'].hasError('backend')">
+            {{ f['branch_contact_person_name'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Contact Mobile -->
+        <mat-form-field class="w-full">
+          <mat-label>Contact Person Mobile</mat-label>
+          <input matInput formControlName="branch_contact_person_mobile">
+
+          <mat-error *ngIf="f['branch_contact_person_mobile'].hasError('backend')">
+            {{ f['branch_contact_person_mobile'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Contact Person Mobile_2</mat-label>
+          <input matInput formControlName="branch_contact_person_alt_mobile">
+
+          <mat-error *ngIf="f['branch_contact_person_alt_mobile'].hasError('backend')">
+            {{ f['branch_contact_person_alt_mobile'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+          <mat-label>Subscription (Days)</mat-label>
+          <input matInput formControlName="subscription_period">
+
+          <mat-error *ngIf="f['subscription_period'].hasError('backend')">
+            {{ f['subscription_period'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Subscription Count (Days)</mat-label>
+          <input matInput formControlName="subscription_count">
+
+          <mat-error *ngIf="f['subscription_count'].hasError('backend')">
+            {{ f['subscription_count'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Status -->
+        <mat-form-field class="w-full">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="branch_model_pharmacy_status">
+            <mat-option value="YES">YES</mat-option>
+            <mat-option value="NO">NO</mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="f['branch_model_pharmacy_status'].hasError('required')">
+            Status is required
+          </mat-error>
+
+          <mat-error *ngIf="f['branch_model_pharmacy_status'].hasError('backend')">
+            {{ f['branch_model_pharmacy_status'].getError('backend') }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="p-4 border rounded-md bg-gray-50">
+          <h3 class="font-semibold mb-3 text-sm text-gray-600 uppercase tracking-wider">
+            Accepted Payment Methods
+          </h3>
+
+          <div class="grid grid-cols-2 gap-4 items-start">
+            <div *ngFor="let type of paymentTypeOptions" class="flex flex-col">
+              <mat-checkbox
+                [checked]="isPaymentTypeSelected(type)"
+                (change)="onPaymentTypeChange(type, $event.checked)">
+                {{ type }}
+              </mat-checkbox>
+
+              <mat-form-field
+                *ngIf="type === 'Mobile Banking' && isPaymentTypeSelected('Mobile Banking')"
+                class="mt-2 w-full"
+                appearance="outline">
+                <mat-label>Account / Wallet No</mat-label>
+                <input matInput formControlName="mobile_banking_account" placeholder="e.g. 01712xxxxxx">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shop Configuration -->
+        <div formGroupName="branch_config" class="config-box border p-4 rounded-md bg-gray-50">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-semibold text-sm text-gray-600 uppercase tracking-wider">
+              Shop Configuration
+            </h3>
+            <mat-checkbox
+              (change)="toggleAllConfigs($event.checked)"
+              [checked]="isAllSelected()"
+              [indeterminate]="isSomeSelected()"
+              class="text-xs text-gray-500">
+              Select All
+            </mat-checkbox>
+          </div>
+
+          <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+            <div *ngFor="let option of shopConfigOptions" class="flex items-center h-10">
+              <mat-checkbox [formControlName]="option.key">
+                {{ option.label }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center gap-4 p-4 border rounded-md bg-gray-50 relative">
+          <label class="font-semibold text-gray-700">Shop Logo</label>
+
+          <div class="relative group">
+            <img
+              [src]="imagePreview || defaultStoreImage"
+              class="w-32 h-32 object-cover rounded-lg border-2 border-dashed border-gray-300"
+              alt="Logo Preview"
+            >
+
+            <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg cursor-pointer" (click)="fileInput.click()">
+              <span class="text-white text-xs font-medium">Change Logo</span>
+            </div>
+
+            <button
+              *ngIf="imagePreview"
+              type="button"
+              (click)="removeImage($event)"
+              class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-lg hover:bg-red-600 transition-colors"
+              matTooltip="Remove Image"
+            >
+              <span class="material-icons" style="font-size: 18px;">close</span>
+            </button>
+          </div>
+
+          <input
+            #fileInput
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            class="hidden"
+          >
+        </div>
+
+        <!-- Actions -->
+        <div class="flex justify-end gap-2 mt-4">
+          <button mat-stroked-button (click)="cancel()" [disabled]="isSaving">
+            Cancel
+          </button>
+
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="save()"
+            [disabled]="form.invalid || isSaving"
+            class="relative"
+          >
+            <span *ngIf="!isSaving">{{ isEdit ? 'Update' : 'Save' }}</span>
+
+            <div *ngIf="isSaving" class="flex items-center gap-2">
+              <mat-spinner diameter="20" color="accent"></mat-spinner>
+              <span>Processing...</span>
+            </div>
+          </button>
+        </div>
+
+      </form>
+    </mat-dialog-content>
+  </mat-card-content>
+</mat-card>

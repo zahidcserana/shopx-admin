@@ -1,0 +1,19 @@
+.active-expired {
+  background-color: #f44336 !important; /* Material Warn Red */
+  color: white !important;
+  border-color: #d32f2f !important;
+
+  mat-icon {
+    color: white !important;
+  }
+}
+
+.active-soon {
+  background-color: #ff9800 !important; /* Material Accent/Orange */
+  color: white !important;
+  border-color: #f57c00 !important;
+
+  mat-icon {
+    color: white !important;
+  }
+}

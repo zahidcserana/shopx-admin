@@ -1,0 +1,11 @@
+ng serve --progress=false
+
+
+
+
+ng serve --progress=false
+
+script -q /dev/null ng serve
+
+
+

@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Extend Subscription</h2>
+
+<mat-dialog-content>
+  <p class="text-sm text-gray-500 mb-4">
+    Current: <strong>{{ data.current }} Days</strong>
+  </p>
+
+  <div class="flex flex-col gap-2">
+    <button
+      mat-stroked-button
+      color="primary"
+      *ngFor="let opt of data.options"
+      (click)="onSelect(opt.value)"
+      class="w-full text-left flex justify-between"
+    >
+      {{ opt.label }}
+      <span>+{{ opt.value }} Days</span>
+    </button>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

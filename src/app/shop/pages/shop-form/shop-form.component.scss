@@ -1,0 +1,10 @@
+.dialog-content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.config-item {
+  display: flex;
+  align-items: center;
+  height: 40px; /* Ensures consistent row height */
+}
