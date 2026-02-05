@@ -159,6 +159,28 @@
           </mat-error>
         </mat-form-field>
 
+        <div class="p-4 border rounded-md bg-gray-50" *ngIf="!isEdit">
+          <h3 class="font-semibold mb-3 text-sm text-gray-600 uppercase tracking-wider">
+            Admin Account
+          </h3>
+          <mat-form-field class="w-full">
+            <mat-label>Admin Email</mat-label>
+            <input matInput formControlName="email">
+
+            <mat-error *ngIf="f['email'].hasError('backend')">
+              {{ f['email'].getError('backend') }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password">
+
+            <mat-error *ngIf="f['password'].hasError('backend')">
+              {{ f['password'].getError('backend') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
         <div class="p-4 border rounded-md bg-gray-50">
           <h3 class="font-semibold mb-3 text-sm text-gray-600 uppercase tracking-wider">
             Accepted Payment Methods

@@ -90,6 +90,8 @@ export class ShopFormComponent implements OnInit {
     });
 
     this.form = this.fb.group({
+      email: [null],
+      password: [null],
       pharmacy_id: [null, Validators.required],
       branch_name: ['', Validators.required],
       branch_city: [''],

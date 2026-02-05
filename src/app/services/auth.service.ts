@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private API = 'http://localhost/AJ/shop-back/api/admin';
+  private apiUrl = `${environment.apiUrl}/admin`;
 
   constructor(private http: HttpClient) {}
 
   login(data: any) {
-    return this.http.post<any>(`${this.API}/login`, {
+    return this.http.post<any>(`${this.apiUrl}/login`, {
       email: data.email,
       password: data.password,
     }).pipe(

@@ -17,7 +17,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Client',
     iconName: 'solar:planet-2-linear',
-    route: 'authentication',
+    route: 'client',
     children: [
       {
         displayName: 'List',
@@ -34,7 +34,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Shop',
     iconName: 'solar:shop-2-linear',
-    route: 'authentication',
+    route: 'shop',
     children: [
       {
         displayName: 'List',
