@@ -19,10 +19,10 @@ import { MatInputModule } from '@angular/material/input';
 
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
-import { ClientService } from '../../services/client.service';
 import { ClientFormComponent } from '../client-form/client-form.component';
 import { Client } from '../../models/client.model';
 import { RouterModule } from '@angular/router';
+import { ClientService } from 'src/app/api/services/client.service';
 
 @Component({
   selector: 'app-client-list',
@@ -53,7 +53,7 @@ export class ClientListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Client>([]);
 
   /** Pagination + sorting */
-  total = 0;
+  total: any = 0;
   pageSize = 10;
 
   /** Search */

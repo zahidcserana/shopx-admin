@@ -8,10 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ShopService } from '../../services/shop.service';
 import { CompanyOption, DEFAULT_SHOP_CONFIG, PAYMENT_TYPE_OPTIONS, Shop, SHOP_CONFIG_OPTIONS, ShopConfig } from '../../models/shop.model';
 import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
-import { ClientService } from 'src/app/client/services/client.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
@@ -20,6 +18,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { environment } from 'src/environments/environment';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { ClientService } from 'src/app/api/services/client.service';
+import { ShopService } from 'src/app/api/services/shop.service';
 
 @Component({
   selector: 'app-shop-form',

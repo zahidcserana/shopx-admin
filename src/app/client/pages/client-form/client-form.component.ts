@@ -8,9 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ClientService } from '../../services/client.service';
 import { Client } from '../../models/client.model';
 import { MatCardModule } from '@angular/material/card';
+import { ClientService } from 'src/app/api/services/client.service';
 
 @Component({
   selector: 'app-client-form',

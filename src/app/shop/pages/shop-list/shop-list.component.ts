@@ -11,11 +11,11 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { ApiResponse, Shop, SUBSCRIPTION_OPTIONS } from '../../models/shop.model';
 import { ShopFormComponent } from '../shop-form/shop-form.component';
-import { ShopService } from '../../services/shop.service';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SubscriptionDialogComponent } from '../../components/subscription-dialog/subscription-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { ShopService } from 'src/app/api/services/shop.service';
 
 @Component({
   selector: 'app-shop-list',
@@ -58,7 +58,7 @@ export class ShopListComponent {
   dataSource = new MatTableDataSource<Shop>([]);
 
   /** Pagination + sorting */
-  total = 0;
+  total: any = 0;
   pageSize = 10;
   isExpired = false;
   isExpiredSoon = false;
