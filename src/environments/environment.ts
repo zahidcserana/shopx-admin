@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  api: 'https://analyticalj.com/shop-back/api/admin',
-  apiUrl: 'https://analyticalj.com/shop-back/api/admin',
-  apiDomain: 'https://analyticalj.com/shop-back/',
+  api: 'http://localhost/AJ/shop-back/api/admin',
+  apiUrl: 'http://localhost/AJ/shop-back/api/admin',
+  apiDomain: 'http://localhost/AJ/shop-back/',
 };

@@ -45,6 +45,7 @@ export interface ShopConfig {
   en_serial_no: boolean;
   en_tp: boolean;
   en_emi: boolean;
+  en_delivery_order: boolean;
 }
 
 // shop-config.options.ts
@@ -59,6 +60,7 @@ export const SHOP_CONFIG_OPTIONS: {
   { key: 'en_batch', label: 'Enable Batch' },
   { key: 'en_serial_no', label: 'Enable Serial No' },
   { key: 'en_tp', label: 'Enable TP' },
+  { key: 'en_delivery_order', label: 'Enable Delivery Order' },
   { key: 'en_emi', label: 'Enable EMI' }
 ];
 
@@ -71,6 +73,7 @@ export const DEFAULT_SHOP_CONFIG: ShopConfig = {
   en_batch: true,
   en_serial_no: false,
   en_tp: false,
+  en_delivery_order: false,
   en_emi: true
 };
 
